@@ -50,9 +50,9 @@ int main(int argc, char** argv)
 	// Computation parameters:
 	struct Task global_task =
 	{
-		.from =   0.0,
-		.to   = 100.0,	
-		.step = 0.00000002
+		.from =  0.0,
+		.to   = 30.0,
+		.step = 0.00000001
 	};
 
 	// Give out computational tasks:
