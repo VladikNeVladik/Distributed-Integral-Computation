@@ -28,11 +28,13 @@ clean:
 
 HEADERS = src/Logging.h src/Values.h
 
-bin/computation-master.out : src/computation-master.c src/Master.h ${HEADERS}
+bin/computation-master : src/computation-master.c src/Master.h ${HEADERS}
 	gcc -D=LOG_TO_STDOUT ${CCFLAGS} $< -o $@
 
-bin/computation-worker.out : src/computation-worker.c src/Worker.h ${HEADERS}
+bin/computation-worker : src/computation-worker.c src/Worker.h ${HEADERS}
 	gcc -D=LOG_TO_STDOUT ${CCFLAGS} $< -o $@
+
+compile : bin/computation-master bin/computation-worker
 
 #======================#
 # INTEGRAL COMPUTATION #
@@ -40,12 +42,12 @@ bin/computation-worker.out : src/computation-worker.c src/Worker.h ${HEADERS}
 
 run_master : bin/computation-master.out
 	@ printf "\033[1;33mMaster Running!\033[0m\n"
-	@ bin/computation-master.out 1
+	@ bin/computation-master 1
 	@ printf "\033[1;33mMaster Finished!\033[0m\n"
 
 run_worker : bin/computation-worker.out 
 	@ printf "\033[1;33mWorker Running!\033[0m\n"
-	@ bin/computation-worker.out 5
+	@ bin/computation-worker. 5
 	@ printf "\033[1;33mWorker Finished!\033[0m\n"
 
 
