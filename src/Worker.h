@@ -480,27 +480,27 @@ void perform_computations(struct WorkerHandle* handle)
 	}
 
 	unsigned num_parasites = 0;
-	if (handle->num_threads % num_procs != 0)
-	{
-		for (unsigned i = handle->num_threads % num_procs; i < num_procs; ++i, ++num_parasites)
-		{
-			cpu_set_t cpu_to_run_on;
-			CPU_ZERO(&cpu_to_run_on);
-			CPU_SET(i % num_procs, &cpu_to_run_on);
-			if (pthread_attr_setaffinity_np(&attr, sizeof(cpu_to_run_on), &cpu_to_run_on) != 0)
-			{
-				LOG_ERROR("[perform_computations] Unable to call pthread_attr_setaffinity_np()");
-				exit(EXIT_FAILURE);
-			}
+	// if (handle->num_threads % num_procs != 0)
+	// {
+	// 	for (unsigned i = handle->num_threads % num_procs; i < num_procs; ++i, ++num_parasites)
+	// 	{
+	// 		cpu_set_t cpu_to_run_on;
+	// 		CPU_ZERO(&cpu_to_run_on);
+	// 		CPU_SET(i % num_procs, &cpu_to_run_on);
+	// 		if (pthread_attr_setaffinity_np(&attr, sizeof(cpu_to_run_on), &cpu_to_run_on) != 0)
+	// 		{
+	// 			LOG_ERROR("[perform_computations] Unable to call pthread_attr_setaffinity_np()");
+	// 			exit(EXIT_FAILURE);
+	// 		}
 
-			pthread_t thread_id;
-			if (pthread_create(&thread_id, &attr, &parasite_task, NULL) != 0)
-			{
-				LOG_ERROR("[perform_computations] Unable to create pasrasite thread");
-				exit(EXIT_FAILURE);
-			}
-		}
-	}
+	// 		pthread_t thread_id;
+	// 		if (pthread_create(&thread_id, &attr, &parasite_task, NULL) != 0)
+	// 		{
+	// 			LOG_ERROR("[perform_computations] Unable to create pasrasite thread");
+	// 			exit(EXIT_FAILURE);
+	// 		}
+	// 	}
+	// }
 	
 	LOG("Started %u computations and %u parasites", handle->num_threads, num_parasites);
 
