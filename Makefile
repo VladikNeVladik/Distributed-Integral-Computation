@@ -34,7 +34,7 @@ bin/computation-master : src/computation-master.c src/Master.h ${HEADERS}
 bin/computation-worker : src/computation-worker.c src/Worker.h ${HEADERS}
 	gcc -D=LOG_TO_STDOUT ${CCFLAGS} $< -o $@
 
-compile : bin/computation-master bin/computation-worker
+compile : install bin/computation-master bin/computation-worker
 
 #======================#
 # INTEGRAL COMPUTATION #
